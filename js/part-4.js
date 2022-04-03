@@ -1,4 +1,3 @@
-"use strict";
 // Parte 2.4 ejercicio 1 Mostrar/ocultar formulario
 const newFormElement = document.querySelector(".js-new-form");
 const linkNewFormElememt = document.querySelector(".js-button-new-form");
@@ -40,16 +39,16 @@ const inputDescSearch = document.querySelector(".js_in_search_desc");
 const inputRaceSearch = document.querySelector(".js-input-search-race");
 const labelMesageErrorSearch = document.querySelector(".js-label-error-search");
 
-// buttonSearch.addEventListener("click", (event) => {
-//   event.preventDefault();
-//   const valueDescSearch = inputDescSearch.value;
-//   const valueRaceSearch = inputRaceSearch.value;
-//   if (valueDescSearch === "" || valueRaceSearch === "") {
-//     labelMesageErrorSearch.innerHTML = "Debe rellenar algún";
-//   } else {
-//     labelMesageErrorSearch.innerHTML = "";
-//   }
-// });
+buttonSearch.addEventListener("click", (event) => {
+  event.preventDefault();
+  const valueDescSearch = inputDescSearch.value;
+  const valueRaceSearch = inputRaceSearch.value;
+  if (valueDescSearch === "" || valueRaceSearch === "") {
+    labelMesageErrorSearch.innerHTML = "Debe rellenar algún";
+  } else {
+    labelMesageErrorSearch.innerHTML = "";
+  }
+});
 
 // Parte 2.4 ejercicio 4 Cancelar formulario
 const buttonCancelForm = document.querySelector(".js-btn-cancel");

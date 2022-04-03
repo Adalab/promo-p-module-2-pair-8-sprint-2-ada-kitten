@@ -12,12 +12,13 @@ const inputName = document.querySelector('.js-input-name');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMesageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
+const inputRace = document.querySelector('.js-input-race');
 
 //Objects from Kittens
 const kittenData_1 = {
   image: 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg',
   name: 'Anastacio',
-  desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+  desc: 'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
   race: 'British Shorthair',
 };
 const kittenData_2 = {
@@ -31,13 +32,13 @@ const kittenData_3 = {
   image:
     'https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg',
   name: 'Cielo',
-  desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+  desc: 'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
   race: 'British Shorthair',
 };
 
 const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
 
-//Funtions
+//Functions
 function renderKitten(kittenData) {
   const kitten = `<li class="card">
     <article>
@@ -120,20 +121,6 @@ linkNewFormElememt.addEventListener('click', handleClickNewCatForm);
 buttonAdd.addEventListener('click', addNewKitten);
 buttonCancelForm.addEventListener('click', cancelNewKitten);
 
-
-console.log('hola');
-
-//  const buttonAdd = document.querySelector(".js-btn-add");
-//  const inputDesc = document.querySelector(".js-input-desc");
-//  const inputPhoto = document.querySelector(".js-input-photo");
-//  const inputName = document.querySelector(".js-input-name");
-const inputRace = document.querySelector('.js-input-race');
-//  const labelMesageError = document.querySelector(".js-label-error");
-
-// copiado de part-7
-//  const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
-
-
 //Add new kitten
 function addNewKitten(event) {
   event.preventDefault();
@@ -158,25 +145,18 @@ function addNewKitten(event) {
     labelMesageError.innerHTML = 'Mola! Un nuevo gatito en Adalab!';
     console.log('hello2');
   }
-
-  // faltaría borrar valores
-
   const newKittenDataObject = {
     image: valuePhoto,
     name: valueName,
     desc: valueDesc,
     race: valueRace,
   };
-
   kittenDataList.push(newKittenDataObject);
-
   renderKittenList(kittenDataList);
-}
-
-// compruebo que el nuevo objeto se ha añadido al array
-
+};
 
 buttonAdd.addEventListener('click', addNewKitten);
+
 
 /// 
 
@@ -191,6 +171,7 @@ buttonAdd.addEventListener('click', addNewKitten);
 //     }
 //   }
 // }
+
 debugger;
 // nueva
 function filterKitten(event) {
@@ -212,6 +193,4 @@ function filterKitten(event) {
 //   // tenemos variables locales, vorem.
 //   paintList(listFiltered);
 // }
-
-
 searchButton.addEventListener('click', filterKitten);
