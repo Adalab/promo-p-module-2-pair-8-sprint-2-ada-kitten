@@ -80,17 +80,17 @@ function handleClickNewCatForm(event) {
   }
 }
 // Add new kitten
-function addNewKitten(event) {
-  event.preventDefault();
-  const valueDesc = inputDesc.value;
-  const valuePhoto = inputPhoto.value;
-  const valueName = inputName.value;
-  if (valueDesc === '' || valuePhoto === '' || valueName === '') {
-    labelMesageError.innerHTML = 'Debe rellenar todos los valores';
-  } else {
-    labelMesageError.innerHTML = '';
-  }
-}
+// function addNewKitten(event) {
+//   event.preventDefault();
+//   const valueDesc = inputDesc.value;
+//   const valuePhoto = inputPhoto.value;
+//   const valueName = inputName.value;
+//   if (valueDesc === '' || valuePhoto === '' || valueName === '') {
+//     labelMesageError.innerHTML = 'Debe rellenar todos los valores';
+//   } else {
+//     labelMesageError.innerHTML = '';
+//   }
+// }
 
 //Cancel the search for a kitten
 function cancelNewKitten(event) {
@@ -172,7 +172,7 @@ buttonAdd.addEventListener('click', addNewKitten);
 //   }
 // }
 
-debugger;
+
 // nueva
 function filterKitten(event) {
   event.preventDefault();
