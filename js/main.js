@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* Elements from HTML */
 const newFormElement = document.querySelector('.js-new-form');
@@ -12,6 +12,7 @@ const inputName = document.querySelector('.js-input-name');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMesageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
+const input_search_race = document.querySelector('.js_in_search_race'); 
 const inputRace = document.querySelector('.js-input-race');
 
 //Objects from Kittens
@@ -19,24 +20,26 @@ const kittenData_1 = {
   image: 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg',
   name: 'Anastacio',
   desc: 'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
-  race: 'British Shorthair',
+  race: 'Spanish Shorthair',
 };
 const kittenData_2 = {
   image:
     'https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg',
   name: 'Fiona',
   desc: 'Juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
-  race: 'British Shorthair',
+  race: 'Portuguese Shorthair',
 };
 const kittenData_3 = {
   image:
     'https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg',
   name: 'Cielo',
   desc: 'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
-  race: 'British Shorthair',
+  race: 'Irish Shorthair',
 };
 
-const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+// const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+
+let kittenDataList = [];
 
 //Functions
 function renderKitten(kittenData) {
@@ -44,13 +47,14 @@ function renderKitten(kittenData) {
     <article>
       <img
         class="card_img"
-        src=${kittenData.image}
+        src=${kittenData.url}
       />
       <h3 class="card_title">${kittenData.name}</h3>
       <h3 class="card_race">${kittenData.race}</h3>
       <p class="card_description">
       ${kittenData.desc}
       </p>
+      
     </article>
     </li>`;
   return kitten;
@@ -113,7 +117,7 @@ function cancelNewKitten(event) {
 //   }
 // }
 //Show kitty list in HTML
-renderKittenList(kittenDataList);
+// renderKittenList(kittenDataList);
 
 //Events
 linkNewFormElememt.addEventListener('click', handleClickNewCatForm);
@@ -158,39 +162,32 @@ function addNewKitten(event) {
 buttonAdd.addEventListener('click', addNewKitten);
 
 
-/// 
-
-//Filter by description
-// function filterKitten(event) {
-//   event.preventDefault();
-//   const descrSearchText = input_search_desc.value;
-//   listElement.innerHTML = '';
-//   for (const kittenItem of kittenDataList) {
-//     if (kittenItem.desc.includes(descrSearchText)) {
-//       listElement.innerHTML += renderKitten(kittenItem);
-//     }
-//   }
-// }
-
-
-// nueva
-function filterKitten(event) {
+function filterKitten2(event) {
   event.preventDefault();
   const descrSearchText = input_search_desc.value;
-  const kittensFiltered = kittenDataList.filter((kitten) => kitten.desc.toLowerCase().includes(descrSearchText));
-
-  listElement.innerHTML = '';
-  for( const li of kittensFiltered){
-    listElement.innerHTML += renderKitten(kittenItem);
-  }
+  const raceSearchText = input_search_race.value;
+  const kittenListFiltered = kittenDataList
+  .filter((kitten) => kitten.desc.toLowerCase().includes(descrSearchText))
+  .filter((kitten) => kitten.race.toLowerCase().includes(raceSearchText));
+  renderKittenList(kittenListFiltered);
 }
 
-// function handleInput() {
-//   const inputValue = inputElement.value;
-//   const listFiltered = adalabers.filter((persona) =>
-//     persona.name.toLowerCase().includes(inputValue)
-//   );
-//   // tenemos variables locales, vorem.
-//   paintList(listFiltered);
-// }
-searchButton.addEventListener('click', filterKitten);
+searchButton.addEventListener('click', filterKitten2);
+
+/// 
+
+// part-10
+
+const GITHUB_USER = 'patriciapallares';
+const SERVER_URL = `https://adalab-api.herokuapp.com/api/kittens/${GITHUB_USER}`;
+
+
+fetch(SERVER_URL, {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json' },
+}).then((response)=> response.json())
+.then((data)=>{
+  kittenDataList = data.results;
+  console.log(kittenDataList);
+  renderKittenList(kittenDataList);
+});
