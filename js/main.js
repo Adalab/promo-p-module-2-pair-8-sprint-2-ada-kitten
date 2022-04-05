@@ -12,7 +12,7 @@ const inputName = document.querySelector('.js-input-name');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMesageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
-const input_search_race = document.querySelector('.js_in_search_race'); 
+const input_search_race = document.querySelector('.js_in_search_race');
 const inputRace = document.querySelector('.js-input-race');
 
 //Objects from Kittens
@@ -157,37 +157,63 @@ function addNewKitten(event) {
   };
   kittenDataList.push(newKittenDataObject);
   renderKittenList(kittenDataList);
-};
+}
 
 buttonAdd.addEventListener('click', addNewKitten);
-
 
 function filterKitten2(event) {
   event.preventDefault();
   const descrSearchText = input_search_desc.value;
   const raceSearchText = input_search_race.value;
   const kittenListFiltered = kittenDataList
-  .filter((kitten) => kitten.desc.toLowerCase().includes(descrSearchText))
-  .filter((kitten) => kitten.race.toLowerCase().includes(raceSearchText));
+    .filter((kitten) => kitten.desc.toLowerCase().includes(descrSearchText))
+    .filter((kitten) => kitten.race.toLowerCase().includes(raceSearchText));
   renderKittenList(kittenListFiltered);
 }
 
 searchButton.addEventListener('click', filterKitten2);
 
-/// 
+///
 
 // part-10
 
 const GITHUB_USER = 'patriciapallares';
 const SERVER_URL = `https://adalab-api.herokuapp.com/api/kittens/${GITHUB_USER}`;
 
-
 fetch(SERVER_URL, {
   method: 'GET',
   headers: { 'Content-Type': 'application/json' },
-}).then((response)=> response.json())
-.then((data)=>{
-  kittenDataList = data.results;
-  console.log(kittenDataList);
-  renderKittenList(kittenDataList);
-});
+})
+  .then((response) => response.json())
+  .then((data) => {
+    kittenDataList = data.results;
+    console.log(kittenDataList);
+    renderKittenList(kittenDataList);
+  });
+
+// part-11
+
+const kittenListStored = JSON.parse(localStorage.getItem('kittensList'));
+
+if (kittenListStored !== null) {
+  renderKittenList(kittenListStored);
+  // vuelve a pintar el listado de gatitos
+  //...
+  //completa el código...
+} else {
+  //sino existe el listado de gatitos en el local storage
+  //haz la petición al servidor
+  fetch(SERVER_URL)
+    .then((response) => response.json())
+    .then((data) => {
+      kittenDataList = data.results;
+      console.log(kittenDataList);
+      renderKittenList(kittenDataList);
+      localStorage.setItem('kittensList', JSON.stringify());
+    })
+
+    .catch((error) => {
+      console.error(error);
+    });
+}
+//
