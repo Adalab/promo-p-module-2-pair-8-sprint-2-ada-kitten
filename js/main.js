@@ -42,28 +42,64 @@ const kittenData_3 = {
 let kittenDataList = [];
 
 //Functions
-function renderKitten(kittenData) {
-  const kitten = `<li class="card">
-    <article>
-      <img
-        class="card_img"
-        src=${kittenData.url}
-      />
-      <h3 class="card_title">${kittenData.name}</h3>
-      <h3 class="card_race">${kittenData.race}</h3>
-      <p class="card_description">
-      ${kittenData.desc}
-      </p>
+// function renderKitten(kittenData) {
+//   const kitten = `<li class="card">
+//     <article>
+//       <img
+//         class="card_img"
+//         src=${kittenData.url}
+//       />
+//       <h3 class="card_title">${kittenData.name}</h3>
+//       <h3 class="card_race">${kittenData.race}</h3>
+//       <p class="card_description">
+//       ${kittenData.desc}
+//       </p>
       
-    </article>
-    </li>`;
-  return kitten;
+//     </article>
+//     </li>`;
+//   return kitten;
+// }
+
+function renderKitten(kittenData) {
+
+  const li = document.createElement('li');
+  listElement.appendChild(li);
+  li.classList.add('card');
+
+  const article = document.createElement('article');
+  li.appendChild(article);
+
+  const img = document.createElement('img');
+  article.appendChild(img);
+  img.classList.add('card_img');
+  img.setAttribute('src',kittenData.url);
+
+  const h3Name = document.createElement('h3');
+  article.appendChild(h3Name);
+  h3Name.classList.add('card_title');
+  const texth3Name = document.createTextNode(kittenData.name);
+  h3Name.appendChild(texth3Name);
+
+  const h3Race = document.createElement('h3');
+  article.appendChild(h3Race);
+  h3Race.classList.add('card_race');
+  const texth3Race = document.createTextNode(kittenData.race);
+  h3Race.appendChild(texth3Race);
+
+  const p = document.createElement('p');
+  article.appendChild(p);
+  p.classList.add('card_description');
+  const textP = document.createTextNode(kittenData.desc);
+  p.appendChild(textP);
+
+return li;
 }
 
 function renderKittenList(kittenDataList) {
   listElement.innerHTML = '';
   for (const kittenItem of kittenDataList) {
-    listElement.innerHTML += renderKitten(kittenItem);
+    const kitten = renderKitten(kittenItem);
+    listElement.appendChild(kitten);
   }
 }
 
@@ -196,7 +232,9 @@ fetch(SERVER_URL, {
 const kittenListStored = JSON.parse(localStorage.getItem('kittensList'));
 
 if (kittenListStored !== null) {
-  renderKittenList(kittenListStored);
+  kittenDataList = kittenListStored;
+  renderKittenList(kittenDataList);
+
   // vuelve a pintar el listado de gatitos
   //...
   //completa el código...
@@ -209,7 +247,7 @@ if (kittenListStored !== null) {
       kittenDataList = data.results;
       console.log(kittenDataList);
       renderKittenList(kittenDataList);
-      localStorage.setItem('kittensList', JSON.stringify());
+      localStorage.setItem('kittensList', JSON.stringify(kittenDataList));
     })
 
     .catch((error) => {
@@ -217,3 +255,43 @@ if (kittenListStored !== null) {
     });
 }
 //
+
+// part-12
+
+// const listElement = document.querySelector('.js-list');
+
+
+function renderKitten(kittenData) {
+
+    const li = document.createElement('li');
+    listElement.appendChild(li);
+    li.classList.add('card');
+
+    const article = document.createElement('article');
+    li.appendChild(article);
+
+    const img = document.createElement('img');
+    article.appendChild(img);
+    img.classList.add('card_img');
+    img.setAttribute('src',kittenData.url);
+
+    const h3Name = document.createElement('h3');
+    article.appendChild(h3Name);
+    h3Name.classList.add('card_title');
+    const texth3Name = document.createTextNode(kittenData.name);
+    h3Name.appendChild(texth3Name);
+
+    const h3Race = document.createElement('h3');
+    article.appendChild(h3Race);
+    h3Race.classList.add('card_race');
+    const texth3Race = document.createTextNode(kittenData.race);
+    h3Race.appendChild(texth3Race);
+
+    const p = document.createElement('p');
+    article.appendChild(p);
+    p.classList.add('card_description');
+    const textP = document.createTextNode(kittenData.desc);
+    p.appendChild(textP);
+
+  return li;
+}
