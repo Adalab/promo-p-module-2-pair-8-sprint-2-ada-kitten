@@ -37,28 +37,10 @@ const kittenData_3 = {
   race: 'Irish Shorthair',
 };
 
-// const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
 
 let kittenDataList = [];
 
-//Functions
-// function renderKitten(kittenData) {
-//   const kitten = `<li class="card">
-//     <article>
-//       <img
-//         class="card_img"
-//         src=${kittenData.url}
-//       />
-//       <h3 class="card_title">${kittenData.name}</h3>
-//       <h3 class="card_race">${kittenData.race}</h3>
-//       <p class="card_description">
-//       ${kittenData.desc}
-//       </p>
-      
-//     </article>
-//     </li>`;
-//   return kitten;
-// }
+
 
 function renderKitten(kittenData) {
 
@@ -119,18 +101,7 @@ function handleClickNewCatForm(event) {
     hideNewCatForm();
   }
 }
-// Add new kitten
-// function addNewKitten(event) {
-//   event.preventDefault();
-//   const valueDesc = inputDesc.value;
-//   const valuePhoto = inputPhoto.value;
-//   const valueName = inputName.value;
-//   if (valueDesc === '' || valuePhoto === '' || valueName === '') {
-//     labelMesageError.innerHTML = 'Debe rellenar todos los valores';
-//   } else {
-//     labelMesageError.innerHTML = '';
-//   }
-// }
+
 
 //Cancel the search for a kitten
 function cancelNewKitten(event) {
@@ -140,20 +111,6 @@ function cancelNewKitten(event) {
   inputPhoto.value = '';
   inputName.value = '';
 }
-
-// //Filter by description
-// function filterKitten(event) {
-//   event.preventDefault();
-//   const descrSearchText = input_search_desc.value;
-//   listElement.innerHTML = '';
-//   for (const kittenItem of kittenDataList) {
-//     if (kittenItem.desc.includes(descrSearchText)) {
-//       listElement.innerHTML += renderKitten(kittenItem);
-//     }
-//   }
-// }
-//Show kitty list in HTML
-// renderKittenList(kittenDataList);
 
 //Events
 linkNewFormElememt.addEventListener('click', handleClickNewCatForm);
@@ -209,8 +166,6 @@ function filterKitten2(event) {
 
 searchButton.addEventListener('click', filterKitten2);
 
-///
-
 // part-10
 
 const GITHUB_USER = 'patriciapallares';
@@ -234,13 +189,7 @@ const kittenListStored = JSON.parse(localStorage.getItem('kittensList'));
 if (kittenListStored !== null) {
   kittenDataList = kittenListStored;
   renderKittenList(kittenDataList);
-
-  // vuelve a pintar el listado de gatitos
-  //...
-  //completa el código...
 } else {
-  //sino existe el listado de gatitos en el local storage
-  //haz la petición al servidor
   fetch(SERVER_URL)
     .then((response) => response.json())
     .then((data) => {
@@ -254,12 +203,9 @@ if (kittenListStored !== null) {
       console.error(error);
     });
 }
-//
+
 
 // part-12
-
-// const listElement = document.querySelector('.js-list');
-
 
 function renderKitten(kittenData) {
 
